@@ -7,14 +7,17 @@ class AuthService {
     return _instance;
   }
 
-  void signUpWithEmailAndPassword(String email, String password) async {
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-    } catch (e) {
-      print(e);
-    }
+  Future signUpWithEmailAndPassword(String email, String password) async {
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+  }
+
+  Future signInWithEmailAndPassword(String email, String password) async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
   }
 }

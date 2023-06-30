@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -19,22 +20,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final initialRoute =
+        FirebaseAuth.instance.currentUser == null ? 'sign_in' : 'home';
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: '/sign_up',
+      initialRoute: initialRoute,
       onGenerateRoute: (settings) {
         return MaterialPageRoute(
           builder: (context) {
             switch (settings.name) {
-              case '/':
+              case 'home':
                 return const HomeView();
-              case '/sign_in':
+              case 'sign_in':
                 return const SignInView();
-              case '/sign_up':
+              case 'sign_up':
                 return const SignUpView();
               default:
                 return const SignInView();
